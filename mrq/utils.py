@@ -10,7 +10,7 @@ import math
 import json
 import datetime
 from bson import ObjectId
-
+import uuid
 #
 # Utils are functions that should be independent from the rest of MRQ's codebase
 #
@@ -181,6 +181,8 @@ class MongoJSONEncoder(json.JSONEncoder):
         if isinstance(obj, (datetime.datetime, datetime.date)):
             return obj.isoformat()
         elif isinstance(obj, ObjectId):
+            return str(obj)
+        elif isinstance(obj, uuid):
             return str(obj)
         elif isinstance(obj, bytes):
             return obj.decode('utf-8')
