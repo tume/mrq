@@ -3,7 +3,9 @@ from future import standard_library
 standard_library.install_aliases()
 from future.utils import iteritems
 from gevent import monkey
-monkey.patch_all(socket=False)
+monkey.patch_all()
+import werkzeug.serving
+werkzeug.serving.WSGIRequestHandler.wbufsize = -1
 
 from flask import Flask, request, render_template
 
